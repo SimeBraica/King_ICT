@@ -1,4 +1,5 @@
 ﻿using BAL;
+using DAL.Models;
 using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,8 +21,13 @@ namespace API.Controllers {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> Product() {
             var products = await _productService.GetAllProducts();
-            return products.ToList();
+            return Ok(products);
+        }
 
+        [HttpGet("{title}")]
+        public async Task<ActionResult<IEnumerable<Product>>> ProductByTitle(string title) {
+            var product = await _productService.GetProduct(title);
+            return Ok(product);
         }
     }
 }

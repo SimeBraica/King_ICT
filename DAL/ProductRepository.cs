@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
-
+using System.Linq;
 namespace DAL {
     public class ProductRepository : IDisposable {
 
@@ -20,6 +20,11 @@ namespace DAL {
         public async Task<List<Product>> GetProductsAsync() {
             var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>("https://dummyjson.com/products");
             return productResponse.Products;
+        }
+
+        public async Task<List<Product>> GetProductByTitleAsync(string title) {
+            var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>("https://dummyjson.com/products");
+            return productResponse.Products.Where(p => p.Title.Contains(title)).ToList();
         }
 
 

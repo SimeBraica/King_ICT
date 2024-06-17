@@ -1,4 +1,5 @@
-﻿using DAL; 
+﻿using DAL;
+using DAL.Models;
 using DTO;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,14 @@ namespace BAL {
                     ShortDescription = p.Description.Length > 100 ? p.Description.Substring(0, 100) : p.Description,
                     Price = p.Price
                 }).ToList();
+            }
+        }
+
+
+        public async Task<List<Product>> GetProduct(string title) {
+            using (var repo = new ProductRepository(_httpClient)) {
+                var products = await repo.GetProductByTitleAsync(title);
+                return products.ToList();
             }
         }
     }
