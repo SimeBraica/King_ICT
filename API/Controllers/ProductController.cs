@@ -32,7 +32,14 @@ namespace API.Controllers {
 
         [HttpGet("filter")]
         public async Task<ActionResult<IEnumerable<Product>>> ProductWithFilters([FromQuery] string category, [FromQuery] decimal price) {
-            var products = await _productService.GetProductWithFilters(category, price);
+            var products = await _productService.FilterProducts(category, price);
+            return Ok(products);
+        }
+
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Product>>> SearchProducts([FromQuery] string searchTerm) {
+            var products = await _productService.SearchProducts(searchTerm.ToLower());
             return Ok(products);
         }
 

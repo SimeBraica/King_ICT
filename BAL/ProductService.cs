@@ -36,9 +36,17 @@ namespace BAL {
         }
 
 
-        public async Task<List<Product>> GetProductWithFilters(string category, decimal price) {
+        public async Task<List<Product>> FilterProducts(string category, decimal price) {
             using (var repo = new ProductRepository(_httpClient)) {
                 var products = await repo.GetProductWithFiltersAsync(category, price);
+                return products.ToList();
+            }
+        }
+        
+
+        public async Task<List<Product>> SearchProducts(string searchTerm) {
+            using (var repo = new ProductRepository(_httpClient)) {
+                var products = await repo.GetProductWithSearchAsync(searchTerm);
                 return products.ToList();
             }
         }

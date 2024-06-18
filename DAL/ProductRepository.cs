@@ -31,5 +31,10 @@ namespace DAL {
             var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>($"https://dummyjson.com/products");
             return productResponse.Products.Where(p => p.Category == category && p.Price == price).ToList();
         }
+
+        public async Task<List<Product>> GetProductWithSearchAsync(string searchTerm) {
+            var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>($"https://dummyjson.com/products");
+            return productResponse.Products.Where(p => p.Title.ToLower().Contains(searchTerm)).ToList();
+        }
     }
 }
