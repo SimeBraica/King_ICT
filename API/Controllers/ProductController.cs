@@ -24,10 +24,18 @@ namespace API.Controllers {
             return Ok(products);
         }
 
-        [HttpGet("{title}")]
-        public async Task<ActionResult<IEnumerable<Product>>> ProductByTitle(string title) {
-            var product = await _productService.GetProduct(title);
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Product>>> ProductByTitle(int id) {
+            var product = await _productService.GetProduct(id);
             return Ok(product);
         }
+
+        [HttpGet("filter")]
+        public async Task<ActionResult<IEnumerable<Product>>> ProductWithFilters([FromQuery] string category, [FromQuery] decimal price) {
+            var products = await _productService.GetProductWithFilters(category, price);
+            return Ok(products);
+        }
+
+
     }
 }

@@ -22,11 +22,14 @@ namespace DAL {
             return productResponse.Products;
         }
 
-        public async Task<List<Product>> GetProductByTitleAsync(string title) {
-            var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>("https://dummyjson.com/products");
-            return productResponse.Products.Where(p => p.Title.Contains(title)).ToList();
+        public async Task<List<Product>> GetProductByIdAsync(int id) {
+            var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>($"https://dummyjson.com/products");
+            return productResponse.Products.Where(p => p.Id == id).ToList();
         }
-
-
+        
+        public async Task<List<Product>> GetProductWithFiltersAsync(string category, decimal price) {
+            var productResponse = await _httpClient.GetFromJsonAsync<ProductResponse>($"https://dummyjson.com/products");
+            return productResponse.Products.Where(p => p.Category == category && p.Price == price).ToList();
+        }
     }
 }
