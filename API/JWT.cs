@@ -53,5 +53,13 @@ namespace API {
             var response = new { token = encryptedToken, username = user.Username };
             return JsonSerializer.Serialize(response);
         }
+
+        public string DecodeToken() {
+            var cookie = _httpContextAccessor.HttpContext.Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadToken(cookie);
+            var jwtS = jwt as JwtSecurityToken;       
+            return jwtS.Claims.First(claim => claim.Type == "username").Value;
+        }
     }
 }

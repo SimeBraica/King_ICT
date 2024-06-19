@@ -48,5 +48,12 @@ namespace DAL
 
             return authResponse;
         }
+
+        public async Task<User> GetUserAsync(string username) {
+            var userResponse = await _httpClient.GetFromJsonAsync<UserResponse>($"https://dummyjson.com/users");
+            UserDTO _user = null;
+            var existingUser = userResponse.Users.FirstOrDefault(u => u.Username == username);
+            return existingUser;
+        }
     }
 }

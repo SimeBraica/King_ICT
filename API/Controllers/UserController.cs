@@ -1,4 +1,5 @@
 ﻿using BAL;
+using DAL.Models;
 using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -46,8 +47,28 @@ namespace API.Controllers
                 return Forbid();
             }
             var token = await _jwt.GenerateJWT(user);
-
-            return Ok(new { token });
+            var authResponse = new AuthResponse {
+                Id = _user.Id,
+                Username = _user.Username,
+                Email = _user.Email,
+                FirstName = _user.FirstName,
+                LastName = _user.LastName,
+                Gender = _user.Gender,
+                Image = _user.Image,
+                Token = token,
+                RefreshToken = "0"
+            };
+            return Ok(authResponse);
         }
+
+        [Authorize]
+        [HttpGet("me")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUserProfile() {
+            var username = _jwt.DecodeToken();
+            var user = await _authService.GetUserProfile(username);
+            return Ok(user);
+        }
+
     }
 }
