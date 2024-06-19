@@ -26,7 +26,7 @@ namespace DAL {
             UserDTO _user = null;
             var existingUser = userResponse.Users.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
             if (existingUser != null) {
-                _user = new UserDTO { Username = existingUser.Username };
+                _user = new UserDTO { Username = existingUser.Username, Password = existingUser.Password, expiresInMins = 30};
             }
             return _user;
         }

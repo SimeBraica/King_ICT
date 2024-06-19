@@ -7,6 +7,5 @@ using System.Threading.Tasks;
 namespace DAL.Models {
     public class UserResponse {
         public List<User> Users { get; set; }
-
     }
 }

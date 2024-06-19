@@ -25,15 +25,12 @@ namespace API {
             var audience = _config["Jwt:Audience"];
             var issuer = _config["Jwt:Issuer"];
             TimeZoneInfo croatiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
-            DateTime expiresLocalTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, croatiaTimeZone).AddMinutes(30);
+            DateTime expiresLocalTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, croatiaTimeZone).AddMinutes(user.expiresInMins);
 
             string username = user.Username;
-            string role = await GetUserRole(username);
-
 
             var jwt_description = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new[] {new Claim("username", username),
-                                                    new Claim("role", role),
                                                    }),
                 Expires = expiresLocalTime,
                 Audience = audience,
@@ -55,14 +52,6 @@ namespace API {
 
             var response = new { token = encryptedToken, username = user.Username };
             return JsonSerializer.Serialize(response);
-        }
-
-        private async Task<string> GetUserRole(string username) {
-            using (var httpClient = _httpClientFactory.CreateClient()) {
-                var userResponse = await httpClient.GetFromJsonAsync<UserResponse>($"https://dummyjson.com/users");
-                return userResponse.Users.Where(u => u.Username == username).ToString();
-            }
-  
         }
     }
 }
