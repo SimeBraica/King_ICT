@@ -1,25 +1,29 @@
 ﻿using BAL;
 using DAL.Models;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using static System.Net.WebRequestMethods;
 
 namespace API.Controllers {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase {
 
 
-
+        private Cache cache = new Cache();
         private readonly ProductService _productService;
 
         public ProductController(HttpClient httpClient) {
             _productService = new ProductService(httpClient);
         }
-
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> Product() {
+            
             var products = await _productService.GetAllProducts();
             return Ok(products);
         }
