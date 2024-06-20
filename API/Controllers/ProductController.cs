@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using System;
 using static System.Net.WebRequestMethods;
 
 namespace API.Controllers {
@@ -13,11 +14,13 @@ namespace API.Controllers {
     [ApiController]
     public class ProductController : ControllerBase {
 
-
-        private Cache cache = new Cache();
+        private IMemoryCache iMemory;
+        //private readonly Cache _cache;
         private readonly ProductService _productService;
 
-        public ProductController(HttpClient httpClient) {
+        public ProductController(HttpClient httpClient, /*Cache cache*/ IMemoryCache imemory) {
+            //_cache = cache;
+            iMemory = imemory;
             _productService = new ProductService(httpClient);
         }
         
@@ -30,20 +33,38 @@ namespace API.Controllers {
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Product>>> ProductByTitle(int id) {
-            var product = await _productService.GetProduct(id);
+            Cache _cache = new Cache(iMemory);
+            var cacheKey = $"product_{id}";
+            var product = _cache.GetFromCache(cacheKey);
+            if (product == null) {
+                product = await _productService.GetProduct(id);
+                _cache.AddToCache(cacheKey, product);
+            }
             return Ok(product);
         }
 
         [HttpGet("filter")]
         public async Task<ActionResult<IEnumerable<Product>>> ProductWithFilters([FromQuery] string category, [FromQuery] decimal price) {
-            var products = await _productService.FilterProducts(category, price);
+            Cache _cache = new Cache(iMemory);
+            var cacheKey = $"product_{category}_{price}";
+            var products = _cache.GetFromCache(cacheKey);
+            if (products == null) {
+                products = await _productService.FilterProducts(category, price);
+                _cache.AddToCache(cacheKey, products);
+            }
             return Ok(products);
         }
 
 
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<Product>>> SearchProducts([FromQuery] string searchTerm) {
-            var products = await _productService.SearchProducts(searchTerm.ToLower());
+            Cache _cache = new Cache(iMemory);
+            var cacheKey = $"product_{searchTerm}";
+            var products = _cache.GetFromCache(cacheKey);
+            if (products == null) {
+                products = await _productService.SearchProducts(searchTerm.ToLower());
+                _cache.AddToCache(cacheKey, products);
+            }
             return Ok(products);
         }
 

@@ -10,9 +10,8 @@ namespace API {
             _memoryCache = memoryCache;
         }
 
-        public void AddToCache(string cacheKey, Product product) {
+        public void AddToCache(string cacheKey, List<Product> product) {
             if (product == null) return;
-
             var cacheExpiryOptions = new MemoryCacheEntryOptions {
                 AbsoluteExpiration = DateTime.Now.AddSeconds(30),
                 Priority = CacheItemPriority.High,
@@ -22,9 +21,9 @@ namespace API {
             _memoryCache.Set(cacheKey, product, cacheExpiryOptions);
         }
 
-        public Product GetFromCache(string cacheKey) {
-            _memoryCache.TryGetValue(cacheKey, out Product product);
-            return product;
+        public List<Product> GetFromCache(string cacheKey) {
+            var result = _memoryCache.Get(cacheKey);
+            return (List<Product>)result;
         }
     }
 }
