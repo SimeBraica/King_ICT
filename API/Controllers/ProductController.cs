@@ -15,11 +15,9 @@ namespace API.Controllers {
     public class ProductController : ControllerBase {
 
         private IMemoryCache iMemory;
-        //private readonly Cache _cache;
         private readonly ProductService _productService;
 
-        public ProductController(HttpClient httpClient, /*Cache cache*/ IMemoryCache imemory) {
-            //_cache = cache;
+        public ProductController(HttpClient httpClient, IMemoryCache imemory) {
             iMemory = imemory;
             _productService = new ProductService(httpClient);
         }
@@ -32,7 +30,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Product>>> ProductByTitle(int id) {
+        public async Task<ActionResult<IEnumerable<Product>>> ProductById(int id) {
             Cache _cache = new Cache(iMemory);
             var cacheKey = $"product_{id}";
             var product = _cache.GetFromCache(cacheKey);
