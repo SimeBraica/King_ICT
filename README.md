@@ -1,4 +1,4 @@
-#KING ICT Akademija
+# KING ICT Akademija
 
 Kao što je i zadano napravljen je middleware sa upravljanje proizovda, kategorija te korisnika. 
 Ovaj repoziroij se može klonirati te pokrenuti u razvojnom okruženja. Ovaj zadatak je napravljen u Visual Studio razvojnom okruženju.
@@ -13,16 +13,16 @@ Za potrebe prijave koristi se korisnik:
 Za potrebe kloniranja potrebno je kopirati i zalijepiti URL u npr. Visual Studio ili Visual Studio Code sljedeći URL: <br>
 https://github.com/SimeBraica/king_ict.git
 
-Projekt se može pokrenuti tako da kliknemo Run u visual studio te se nalazi na sljedećoj adresi:
+Projekt se može pokrenuti tako da kliknemo Run u visual studio te se nalazi na sljedećoj adresi: <br>
 https://localhost:7002/swagger/index.html
 
-##Sve su funkcionalnosti odrađene osim sljedećih:
+## Sve su funkcionalnosti odrađene osim sljedećih:
  -  Unit testovi
  -  Integracijski testovi
  -  Refresh token
 
-API Endpoint-ovi:
-GET api/Product
+## API Endpoint-ovi:
+### GET api/Product
 curl -X 'GET' \
   'https://localhost:7002/api/Product' \
   -H 'accept: text/plain'
