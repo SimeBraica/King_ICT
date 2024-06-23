@@ -41,9 +41,9 @@ JSON
       "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
     ]
   }
-] ...
+] 
 ```
-
+Vraća sve proizvode samo što je za primjer Read.me file-a to ispisan samo jedan.
 ### GET api/Product/1
 ```
 curl -X 'GET' \
