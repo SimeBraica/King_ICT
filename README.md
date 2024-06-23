@@ -2,6 +2,7 @@
 
 Kao što je i zadano napravljen je middleware sa upravljanje proizovda, kategorija te korisnika. 
 Ovaj repoziroij se može klonirati te pokrenuti u razvojnom okruženja. Ovaj zadatak je napravljen u Visual Studio razvojnom okruženju.
+Cijela aplikacija je testirana na swagger-u. Te se preporuča isti za probu.
 
 Za potrebe prijave koristi se korisnik: 
 ```json
@@ -28,19 +29,19 @@ curl -X 'GET' \
   'https://localhost:7002/api/Product' \
   -H 'accept: text/plain'
 ```
-Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token zbog [Authorize] deklaracije kontrolera. Ovaj endpoint vraća sve proizvode o sljedećem formatu: 
+Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token zbog [Authorize] deklaracije kontrolera. Ovaj endpoint vraća sve proizvode u sljedećem formatu: 
 JSON
 ```json
 [
   {
-    "title": "string",
-    "price": 0,
-    "shortDescription": "string",
+    "title": "Essence Mascara Lash Princess",
+    "price": 9.99,
+    "shortDescription": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effe",
     "images": [
-    "string"
+      "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
     ]
   }
-]
+] ...
 ```
 
 ### GET api/Product/1
@@ -52,51 +53,68 @@ curl -X 'GET' \
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća jedan proizvod ovisno koji smo id upisali.
 Endpoint vraća proizvod u sljedećem JSON formatu:
 ```json
-{
-  "id": 0,
-  "title": "string",
-  "description": "string",
-  "category": "string",
-  "price": 0,
-  "discountPercentage": 0,
-  "rating": 0,
-  "stock": 0,
-  "tags": [
-    "string"
-  ],
-  "brand": "string",
-  "sku": "string",
-  "weight": 0,
-  "dimensions": {
-    "width": 0,
-    "height": 0,
-    "depth": 0
-  },
-  "warrantyInformation": "string",
-  "shippingInformation": "string",
-  "availabilityStatus": "string",
-  "reviews": [
-    {
-      "rating": 0,
-      "comment": "string",
-      "date": "2024-06-23T15:18:25.921Z",
-      "reviewerName": "string",
-      "reviewerEmail": "string"
-    }
-  ],
-  "returnPolicy": "string",
-  "minimumOrderQuantity": 0,
-  "meta": {
-    "createdAt": "2024-06-23T15:18:25.921Z",
-    "updatedAt": "2024-06-23T15:18:25.921Z",
-    "barcode": "string",
-    "qrCode": "string"
-  },
-  "images": [
-    "string"
-  ],
-  "thumbnail": "string"
-}
+[
+  {
+    "id": 1,
+    "title": "Essence Mascara Lash Princess",
+    "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+    "category": "beauty",
+    "price": 9.99,
+    "discountPercentage": 7.17,
+    "rating": 4.94,
+    "stock": 5,
+    "tags": [
+      "beauty",
+      "mascara"
+    ],
+    "brand": "Essence",
+    "sku": "RCH45Q1A",
+    "weight": 2,
+    "dimensions": {
+      "width": 23.17,
+      "height": 14.43,
+      "depth": 28.01
+    },
+    "warrantyInformation": "1 month warranty",
+    "shippingInformation": "Ships in 1 month",
+    "availabilityStatus": "Low Stock",
+    "reviews": [
+      {
+        "rating": 2,
+        "comment": "Very unhappy with my purchase!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "John Doe",
+        "reviewerEmail": "john.doe@x.dummyjson.com"
+      },
+      {
+        "rating": 2,
+        "comment": "Not as described!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "Nolan Gonzalez",
+        "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "Very satisfied!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "Scarlett Wright",
+        "reviewerEmail": "scarlett.wright@x.dummyjson.com"
+      }
+    ],
+    "returnPolicy": "30 days return policy",
+    "minimumOrderQuantity": 24,
+    "meta": {
+      "createdAt": "2024-05-23T08:56:21.618Z",
+      "updatedAt": "2024-05-23T08:56:21.618Z",
+      "barcode": "9164035109868",
+      "qrCode": "https://dummyjson.com/public/qr-code.png"
+    },
+    "images": [
+      "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+    ],
+    "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
+  }
+]
 ```
 ### GET api/Product/filter
 ```
@@ -275,7 +293,7 @@ Te vraća sljedeći JSON odgovor:
 ```
 curl -X 'GET' \
   'https://localhost:7002/api/User/me' \
-  -H 'accept: text/plain'ž
+  -H 'accept: text/plain'
 ```
 Ova API putanja vraća podatke trenutno logiranog korisnika koji ima valjani JWT token. Te vraća sljedeći JSON odgovor:
 ```json
