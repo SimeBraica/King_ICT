@@ -28,7 +28,7 @@ curl -X 'GET' \
   'https://localhost:7002/api/Product' \
   -H 'accept: text/plain'
 ```
-Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode o sljedećem formatu: 
+Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token zbog [Authorize] deklaracije kontrolera. Ovaj endpoint vraća sve proizvode o sljedećem formatu: 
 JSON
 ```json
 [
@@ -43,10 +43,12 @@ JSON
 ]
 ```
 
-GET api/Product/1
+### GET api/Product/1
+```
 curl -X 'GET' \
   'https://localhost:7002/api/Product/1' \
   -H 'accept: text/plain'
+```
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća jedan proizvod ovisno koji smo id upisali.
 Endpoint vraća proizvod u sljedećem JSON formatu:
 ```json
@@ -95,4 +97,61 @@ Endpoint vraća proizvod u sljedećem JSON formatu:
   ],
   "thumbnail": "string"
 }
+```
+### GET api/Product/filter
+```
+curl -X 'GET' \
+  'https://localhost:7002/api/Product/filter' \
+  -H 'accept: text/plain
+  ```
+Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća jedan proizvod čiju smo kategoriju i cijenu definirali u tijelu zahtjeva.
+Endpoint vraća proizvod u sljedećem JSON formatu:
 ```json
+[
+  {
+    "id": 0,
+    "title": "string",
+    "description": "string",
+    "category": "string",
+    "price": 0,
+    "discountPercentage": 0,
+    "rating": 0,
+    "stock": 0,
+    "tags": [
+      "string"
+    ],
+    "brand": "string",
+    "sku": "string",
+    "weight": 0,
+    "dimensions": {
+      "width": 0,
+      "height": 0,
+      "depth": 0
+    },
+    "warrantyInformation": "string",
+    "shippingInformation": "string",
+    "availabilityStatus": "string",
+    "reviews": [
+      {
+        "rating": 0,
+        "comment": "string",
+        "date": "2024-06-23T15:28:56.758Z",
+        "reviewerName": "string",
+        "reviewerEmail": "string"
+      }
+    ],
+    "returnPolicy": "string",
+    "minimumOrderQuantity": 0,
+    "meta": {
+      "createdAt": "2024-06-23T15:28:56.758Z",
+      "updatedAt": "2024-06-23T15:28:56.758Z",
+      "barcode": "string",
+      "qrCode": "string"
+    },
+    "images": [
+      "string"
+    ],
+    "thumbnail": "string"
+  }
+]
+  ```
