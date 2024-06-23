@@ -228,7 +228,7 @@ curl -X 'POST' \
 }'
 ```
 Te vraća sljedeći JSON odgovor:
-```
+```json
 {
   "id": 1,
   "username": "emilys",
