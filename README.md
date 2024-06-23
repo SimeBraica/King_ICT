@@ -9,17 +9,17 @@ Za potrebe prijave koristi se korisnik:
   "username": "emilys",
   "password": "emilyspass"
 }
-
-Za potrebe kloniranja potrebno je kopirati i zalijepiti URL u npr. Visual Studio ili Visual Studio Code sljedeći URL:
+```
+Za potrebe kloniranja potrebno je kopirati i zalijepiti URL u npr. Visual Studio ili Visual Studio Code sljedeći URL: <br>
 https://github.com/SimeBraica/king_ict.git
 
 Projekt se može pokrenuti tako da kliknemo Run u visual studio te se nalazi na sljedećoj adresi:
 https://localhost:7002/swagger/index.html
 
-Sve su funkcionalnosti odrađene osim sljedećih:
-  Unit testovi
-  Integracijski testovi
-  Refresh token
+##Sve su funkcionalnosti odrađene osim sljedećih:
+ -  Unit testovi
+ -  Integracijski testovi
+ -  Refresh token
 
 API Endpoint-ovi:
 GET api/Product
@@ -28,6 +28,7 @@ curl -X 'GET' \
   -H 'accept: text/plain'
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode o sljedećem formatu: 
 JSON
+```json
 [
   {
     "title": "string",
@@ -38,7 +39,7 @@ JSON
     ]
   }
 ]
-
+```
 
 GET api/Product/1
 curl -X 'GET' \
@@ -46,6 +47,7 @@ curl -X 'GET' \
   -H 'accept: text/plain'
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća jedan proizvod ovisno koji smo id upisali.
 Endpoint vraća proizvod u sljedećem JSON formatu:
+```json
 {
   "id": 0,
   "title": "string",
@@ -91,3 +93,4 @@ Endpoint vraća proizvod u sljedećem JSON formatu:
   ],
   "thumbnail": "string"
 }
+```json
