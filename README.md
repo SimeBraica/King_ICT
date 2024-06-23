@@ -1,9 +1,14 @@
-KING ICT Akademija
+#KING ICT Akademija
 
 Kao što je i zadano napravljen je middleware sa upravljanje proizovda, kategorija te korisnika. 
 Ovaj repoziroij se može klonirati te pokrenuti u razvojnom okruženja. Ovaj zadatak je napravljen u Visual Studio razvojnom okruženju.
 
-Za potrebe prijave koristi se korisnik: username: emilys te password: emilyspass
+Za potrebe prijave koristi se korisnik: 
+```json
+{
+  "username": "emilys",
+  "password": "emilyspass"
+}
 
 Za potrebe kloniranja potrebno je kopirati i zalijepiti URL u npr. Visual Studio ili Visual Studio Code sljedeći URL:
 https://github.com/SimeBraica/king_ict.git
