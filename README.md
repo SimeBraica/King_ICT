@@ -101,57 +101,72 @@ Endpoint vraća proizvod u sljedećem JSON formatu:
 ### GET api/Product/filter
 ```
 curl -X 'GET' \
-  'https://localhost:7002/api/Product/filter' \
-  -H 'accept: text/plain
-  ```
+  'https://localhost:7002/api/Product/filter?category=beauty&price=9.99' \
+  -H 'accept: text/plain'
+```
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode čiju smo kategoriju i cijenu definirali u tijelu zahtjeva.
 Endpoint vraća proizvod u sljedećem JSON formatu:
 ```json
 [
   {
-    "id": 0,
-    "title": "string",
-    "description": "string",
-    "category": "string",
-    "price": 0,
-    "discountPercentage": 0,
-    "rating": 0,
-    "stock": 0,
+    "id": 1,
+    "title": "Essence Mascara Lash Princess",
+    "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+    "category": "beauty",
+    "price": 9.99,
+    "discountPercentage": 7.17,
+    "rating": 4.94,
+    "stock": 5,
     "tags": [
-      "string"
+      "beauty",
+      "mascara"
     ],
-    "brand": "string",
-    "sku": "string",
-    "weight": 0,
+    "brand": "Essence",
+    "sku": "RCH45Q1A",
+    "weight": 2,
     "dimensions": {
-      "width": 0,
-      "height": 0,
-      "depth": 0
+      "width": 23.17,
+      "height": 14.43,
+      "depth": 28.01
     },
-    "warrantyInformation": "string",
-    "shippingInformation": "string",
-    "availabilityStatus": "string",
+    "warrantyInformation": "1 month warranty",
+    "shippingInformation": "Ships in 1 month",
+    "availabilityStatus": "Low Stock",
     "reviews": [
       {
-        "rating": 0,
-        "comment": "string",
-        "date": "2024-06-23T15:28:56.758Z",
-        "reviewerName": "string",
-        "reviewerEmail": "string"
+        "rating": 2,
+        "comment": "Very unhappy with my purchase!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "John Doe",
+        "reviewerEmail": "john.doe@x.dummyjson.com"
+      },
+      {
+        "rating": 2,
+        "comment": "Not as described!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "Nolan Gonzalez",
+        "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "Very satisfied!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "Scarlett Wright",
+        "reviewerEmail": "scarlett.wright@x.dummyjson.com"
       }
     ],
-    "returnPolicy": "string",
-    "minimumOrderQuantity": 0,
+    "returnPolicy": "30 days return policy",
+    "minimumOrderQuantity": 24,
     "meta": {
-      "createdAt": "2024-06-23T15:28:56.758Z",
-      "updatedAt": "2024-06-23T15:28:56.758Z",
-      "barcode": "string",
-      "qrCode": "string"
+      "createdAt": "2024-05-23T08:56:21.618Z",
+      "updatedAt": "2024-05-23T08:56:21.618Z",
+      "barcode": "9164035109868",
+      "qrCode": "https://dummyjson.com/public/qr-code.png"
     },
     "images": [
-      "string"
+      "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
     ],
-    "thumbnail": "string"
+    "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
   }
 ]
   ```
@@ -159,7 +174,7 @@ Endpoint vraća proizvod u sljedećem JSON formatu:
 ### GET api/Product/search
 ```
 curl -X 'GET' \
-  'https://localhost:7002/api/Product/search' \
+  'https://localhost:7002/api/Product/search?searchTerm=Essence%20' \
   -H 'accept: text/plain'
 ```
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode čije smo nazive definirali u tijelu zahtjeva.
@@ -167,53 +182,68 @@ Endpoint vraća proizvod u sljedećem JSON formatu:
   ```json
 [
   {
-    "id": 0,
-    "title": "string",
-    "description": "string",
-    "category": "string",
-    "price": 0,
-    "discountPercentage": 0,
-    "rating": 0,
-    "stock": 0,
+    "id": 1,
+    "title": "Essence Mascara Lash Princess",
+    "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+    "category": "beauty",
+    "price": 9.99,
+    "discountPercentage": 7.17,
+    "rating": 4.94,
+    "stock": 5,
     "tags": [
-      "string"
+      "beauty",
+      "mascara"
     ],
-    "brand": "string",
-    "sku": "string",
-    "weight": 0,
+    "brand": "Essence",
+    "sku": "RCH45Q1A",
+    "weight": 2,
     "dimensions": {
-      "width": 0,
-      "height": 0,
-      "depth": 0
+      "width": 23.17,
+      "height": 14.43,
+      "depth": 28.01
     },
-    "warrantyInformation": "string",
-    "shippingInformation": "string",
-    "availabilityStatus": "string",
+    "warrantyInformation": "1 month warranty",
+    "shippingInformation": "Ships in 1 month",
+    "availabilityStatus": "Low Stock",
     "reviews": [
       {
-        "rating": 0,
-        "comment": "string",
-        "date": "2024-06-23T15:31:17.826Z",
-        "reviewerName": "string",
-        "reviewerEmail": "string"
+        "rating": 2,
+        "comment": "Very unhappy with my purchase!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "John Doe",
+        "reviewerEmail": "john.doe@x.dummyjson.com"
+      },
+      {
+        "rating": 2,
+        "comment": "Not as described!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "Nolan Gonzalez",
+        "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "Very satisfied!",
+        "date": "2024-05-23T08:56:21.618Z",
+        "reviewerName": "Scarlett Wright",
+        "reviewerEmail": "scarlett.wright@x.dummyjson.com"
       }
     ],
-    "returnPolicy": "string",
-    "minimumOrderQuantity": 0,
+    "returnPolicy": "30 days return policy",
+    "minimumOrderQuantity": 24,
     "meta": {
-      "createdAt": "2024-06-23T15:31:17.826Z",
-      "updatedAt": "2024-06-23T15:31:17.826Z",
-      "barcode": "string",
-      "qrCode": "string"
+      "createdAt": "2024-05-23T08:56:21.618Z",
+      "updatedAt": "2024-05-23T08:56:21.618Z",
+      "barcode": "9164035109868",
+      "qrCode": "https://dummyjson.com/public/qr-code.png"
     },
     "images": [
-      "string"
+      "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
     ],
-    "thumbnail": "string"
+    "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
   }
 ]
   ```
-### Post /api/User/login 
+### POST /api/User/login 
 Dohvaća i logira te stvara novi JWT token ako je prijava uspješna.
 Ovako izgleda prijava sa točnim korisničkim podacima:
 ```
@@ -241,3 +271,90 @@ Te vraća sljedeći JSON odgovor:
   "refreshToken": "0"
 }
 ```
+### GET /api/User/me
+```
+curl -X 'GET' \
+  'https://localhost:7002/api/User/me' \
+  -H 'accept: text/plain'ž
+```
+Ova API putanja vraća podatke trenutno logiranog korisnika koji ima valjani JWT token. Te vraća sljedeći JSON odgovor:
+```json
+{
+  "id": 1,
+  "firstName": "Emily",
+  "lastName": "Johnson",
+  "maidenName": "Smith",
+  "age": 28,
+  "gender": "female",
+  "email": "emily.johnson@x.dummyjson.com",
+  "phone": "+81 965-431-3024",
+  "username": "emilys",
+  "password": "emilyspass",
+  "birthDate": "1996-5-30",
+  "image": "https://dummyjson.com/icon/emilys/128",
+  "bloodGroup": "O-",
+  "height": 193.24,
+  "weight": 63.16,
+  "eyeColor": "Green",
+  "hair": {
+    "color": "Brown",
+    "type": "Curly"
+  },
+  "ip": "42.48.100.32",
+  "address": {
+    "addressLine": null,
+    "city": "Phoenix",
+    "state": "Mississippi",
+    "stateCode": "MS",
+    "postalCode": "29112",
+    "coordinates": {
+      "lat": -77.16213,
+      "lng": -92.084824
+    },
+    "country": "United States"
+  },
+  "macAddress": "47:fa:41:18:ec:eb",
+  "university": "University of Wisconsin--Madison",
+  "bank": {
+    "cardExpire": "03/26",
+    "cardNumber": "9289760655481815",
+    "cardType": "Elo",
+    "currency": "CNY",
+    "iban": "YPUXISOBI7TTHPK2BR3HAIXL"
+  },
+  "company": {
+    "department": "Engineering",
+    "name": "Dooley, Kozey and Cronin",
+    "title": "Sales Manager",
+    "address": {
+      "addressLine": null,
+      "city": "San Francisco",
+      "state": "Wisconsin",
+      "stateCode": "WI",
+      "postalCode": "37657",
+      "coordinates": {
+        "lat": 71.814525,
+        "lng": -161.150263
+      },
+      "country": "United States"
+    }
+  },
+  "ein": "977-175",
+  "ssn": "900-590-289",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
+  "crypto": {
+    "coin": "Bitcoin",
+    "wallet": "0xb9fc2fe63b2a6c003f1c324c3bfa53259162181a",
+    "network": "Ethereum (ERC20)"
+  },
+  "role": "admin"
+}
+```
+### POST /api/User/logout
+```
+curl -X 'POST' \
+  'https://localhost:7002/api/User/logout' \
+  -H 'accept: */*' \
+  -d ''
+```
+Ova putanja samo briše sve kolčiće te sadržaj u njima te tako je implementiran logout.
