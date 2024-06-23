@@ -22,6 +22,16 @@ namespace API.Controllers {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly JWT _jwt;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// </summary>
+        /// <param name="userService">The user service.</param>
+        /// <param name="authService">The authentication service.</param>
+        /// <param name="logger">The logger instance.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="httpContextAccessor">The HTTP context accessor.</param>
+        /// <param name="httpClientFactory">The HTTP client factory.</param>
+        /// <param name="jwt">The JWT instance.</param>
         public UserController(UserService userService, AuthService authService, ILogger<UserController> logger, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IHttpClientFactory httpClientFactory, JWT jwt) {
             _userService = userService;
             _authService = authService;
@@ -31,6 +41,15 @@ namespace API.Controllers {
             _httpContextAccessor = httpContextAccessor;
             _jwt = new JWT(_config, _httpContextAccessor, _httpClientFactory);
         }
+        /// <summary>
+        /// Logs in a user by validating their credentials and generating a JWT for them.
+        /// </summary>
+        /// <param name="user">The user object containing the username and password.</param>
+        /// <returns>An authentication response with user details and JWT token.</returns>
+        /// <response code="200">Returns the authentication response if login is successful.</response>
+        /// <response code="401">If the credentials are invalid or unauthorized.</response>
+        /// <response code="403">If the login attempt is forbidden.</response>
+        /// <response code="500">If there is an error while processing the login request.</response>
 
         [AllowAnonymous]
         [HttpPost("login")]
@@ -61,6 +80,14 @@ namespace API.Controllers {
             _logger.LogInformation("Login successful for user: {Username}", user.Username);
             return Ok(authResponse);
         }
+        /// <summary>
+        /// Retrieves the profile of the currently logged-in user.
+        /// </summary>
+        /// <returns>The user profile.</returns>
+        /// <response code="200">Returns the user profile.</response>
+        /// <response code="401">If the user is not authorized or the token is invalid.</response>
+        /// <response code="404">If the user profile is not found.</response>
+        /// <response code="500">If there is an error while retrieving the user profile.</response>
 
         [Authorize]
         [HttpGet("me")]
