@@ -1,7 +1,7 @@
 # KING ICT Akademija
 
 Kao što je i zadano napravljen je middleware sa upravljanje proizovda, kategorija te korisnika. 
-Ovaj repoziroij se može klonirati te pokrenuti u razvojnom okruženja. Ovaj zadatak je napravljen u Visual Studio razvojnom okruženju.
+Ovaj repozitorij se može klonirati te pokrenuti u razvojnom okruženja. Ovaj zadatak je napravljen u Visual Studio razvojnom okruženju.
 Cijela aplikacija je testirana na swagger-u. Te se preporuča isti za probu.
 
 Za potrebe prijave koristi se korisnik: 
