@@ -108,5 +108,26 @@ namespace API.Controllers {
             _logger.LogInformation("User profile retrieved for username: {Username}", username);
             return Ok(user);
         }
+
+        /// <summary>
+        /// Logs out the user by deleting all cookies associated with the current request.
+        /// </summary>
+        /// <returns>An IActionResult indicating the success of the logout operation.</returns>
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout() {
+            foreach (var cookie in Request.Cookies) {
+                if (Request.Cookies[cookie.Key] != null) {
+                    var cookieOptions = new CookieOptions {
+                        Expires = DateTimeOffset.UtcNow.AddDays(-1),
+                        HttpOnly = true,
+                        Secure = true,
+                        SameSite = SameSiteMode.None
+                    };
+                    Response.Cookies.Delete(cookie.Key, cookieOptions);
+                }
+            }
+            return Ok();
+        }
     }
 }
