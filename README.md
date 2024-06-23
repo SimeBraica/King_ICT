@@ -23,9 +23,11 @@ https://localhost:7002/swagger/index.html
 
 ## API Endpoint-ovi:
 ### GET api/Product
+```
 curl -X 'GET' \
   'https://localhost:7002/api/Product' \
   -H 'accept: text/plain'
+```
 Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode o sljedećem formatu: 
 JSON
 ```json
