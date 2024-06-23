@@ -104,7 +104,7 @@ curl -X 'GET' \
   'https://localhost:7002/api/Product/filter' \
   -H 'accept: text/plain
   ```
-Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća jedan proizvod čiju smo kategoriju i cijenu definirali u tijelu zahtjeva.
+Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode čiju smo kategoriju i cijenu definirali u tijelu zahtjeva.
 Endpoint vraća proizvod u sljedećem JSON formatu:
 ```json
 [
@@ -155,3 +155,89 @@ Endpoint vraća proizvod u sljedećem JSON formatu:
   }
 ]
   ```
+
+### GET api/Product/search
+```
+curl -X 'GET' \
+  'https://localhost:7002/api/Product/search' \
+  -H 'accept: text/plain'
+```
+Za izvršavanje ove radnje korisnik mora imati svoj pripadajući JWT token. Ovaj endpoint vraća sve proizvode čije smo nazive definirali u tijelu zahtjeva.
+Endpoint vraća proizvod u sljedećem JSON formatu:
+  ```json
+[
+  {
+    "id": 0,
+    "title": "string",
+    "description": "string",
+    "category": "string",
+    "price": 0,
+    "discountPercentage": 0,
+    "rating": 0,
+    "stock": 0,
+    "tags": [
+      "string"
+    ],
+    "brand": "string",
+    "sku": "string",
+    "weight": 0,
+    "dimensions": {
+      "width": 0,
+      "height": 0,
+      "depth": 0
+    },
+    "warrantyInformation": "string",
+    "shippingInformation": "string",
+    "availabilityStatus": "string",
+    "reviews": [
+      {
+        "rating": 0,
+        "comment": "string",
+        "date": "2024-06-23T15:31:17.826Z",
+        "reviewerName": "string",
+        "reviewerEmail": "string"
+      }
+    ],
+    "returnPolicy": "string",
+    "minimumOrderQuantity": 0,
+    "meta": {
+      "createdAt": "2024-06-23T15:31:17.826Z",
+      "updatedAt": "2024-06-23T15:31:17.826Z",
+      "barcode": "string",
+      "qrCode": "string"
+    },
+    "images": [
+      "string"
+    ],
+    "thumbnail": "string"
+  }
+]
+  ```
+### Post /api/User/login 
+Dohvaća i logira te stvara novi JWT token ako je prijava uspješna.
+Ovako izgleda prijava sa točnim korisničkim podacima:
+```
+curl -X 'POST' \
+  'https://localhost:7002/api/User/login' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "emilys",
+  "password": "emilyspass",
+  "expiresInMins": 30
+}'
+```
+Te vraća sljedeći JSON odgovor:
+```
+{
+  "id": 1,
+  "username": "emilys",
+  "email": "emily.johnson@x.dummyjson.com",
+  "firstName": "Emily",
+  "lastName": "Johnson",
+  "gender": "female",
+  "image": "https://dummyjson.com/icon/emilys/128",
+  "token": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVtaWx5cyIsIm5iZiI6MTcxOTE1Njg2NSwiZXhwIjoxNzE5MTU4NjY1LCJpYXQiOjE3MTkxNTY4NjUsImlzcyI6Imh0dHBzOi8vY29ubmVjdGVkUHJvZ3JhbW1lci5jb20iLCJhdWQiOiJodHRwczovL2Nvbm5lY3RlZFByb2dyYW1tZXIuY29tIn0.25SiJ2ZaVfcQd-BAyCxMCGFw7tv02_CDVJmv-sBTQZs\",\"username\":\"emilys\"}",
+  "refreshToken": "0"
+}
+```
